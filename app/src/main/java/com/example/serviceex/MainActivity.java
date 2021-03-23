@@ -3,6 +3,7 @@ package com.example.serviceex;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,11 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startService(intent);
+                if (Build.VERSION.SDK_INT >= 26) {
+                    startForegroundService(intent);
+                } else {
+                    startService(intent);
+                }
             }
         });
 
